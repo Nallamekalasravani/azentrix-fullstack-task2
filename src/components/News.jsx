@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 function News() {
   const [news, setNews] = useState([]);
 
-  const apiKey = import.meta.env.VITE_GNEWS_API_KEY;
+  const apiKey = import.meta.env.VITE_NEWS_API_KEY;
 
   useEffect(() => {
     getNews();
@@ -12,7 +12,7 @@ function News() {
   const getNews = async () => {
     try {
       const res = await fetch(
-        `https://gnews.io/api/v4/top-headlines?country=in&lang=en&max=6&apikey=${apiKey}`
+        `https://newsapi.org/v2/top-headlines?country=us&pageSize=6&apiKey=${apiKey}`
       );
 
       const data = await res.json();
@@ -32,7 +32,10 @@ function News() {
       <div className="news-grid">
         {news.map((item, index) => (
           <div className="news-card" key={index}>
-            <img src={item.image} alt="" />
+            <img
+              src={item.urlToImage || "https://via.placeholder.com/300x200"}
+              alt={item.title}
+            />
 
             <h3>{item.title}</h3>
 
