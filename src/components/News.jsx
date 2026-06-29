@@ -3,17 +3,13 @@ import { useEffect, useState } from "react";
 function News() {
   const [news, setNews] = useState([]);
 
-  const apiKey = import.meta.env.VITE_NEWS_API_KEY;
-
   useEffect(() => {
     getNews();
   }, []);
 
   const getNews = async () => {
     try {
-      const res = await fetch(
-        `https://newsapi.org/v2/top-headlines?country=us&pageSize=6&apiKey=${apiKey}`
-      );
+      const res = await fetch("/api/news");
 
       const data = await res.json();
 
@@ -33,7 +29,7 @@ function News() {
         {news.map((item, index) => (
           <div className="news-card" key={index}>
             <img
-              src={item.urlToImage || "https://via.placeholder.com/300x200"}
+              src={item.image || "https://via.placeholder.com/300x200"}
               alt={item.title}
             />
 
