@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
   try {
-    const apiKey = process.env.VITE_GNEWS_API_KEY;
+   const apiKey = process.env.GNEWS_API_KEY;
 
     const response = await fetch(
       `https://gnews.io/api/v4/top-headlines?country=in&lang=en&max=6&apikey=${apiKey}`
